@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, body { margin:0; height:100%; overflow:hidden; }
+
+body {
+    background: url("img16.png") center/cover no-repeat;
+}
+
+.arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.arrow:hover {
+    transform: translateY(-60%);
+}
+
+#left {
+    left: 120px;
+}
+
+#right {
+    right: 120px;
+}
+</style>
+</head>
+
+<body>
+
+<iframe src="bgmusic.html" style="display:none;"></iframe>
+
+<!-- Left arrow -->
+<a href="img15.html">
+    <img id="left" class="arrow" src="larrow.png" alt="left arrow">
+</a>
+
+<!-- Right arrow (go back to index) -->
+<a href="index.html">
+    <img id="right" class="arrow" src="rarrow.png" alt="right arrow">
+</a>
+
+</body>
+</html>

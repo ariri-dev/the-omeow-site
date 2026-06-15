@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+document.addEventListener("click", () => {
+    const music = document.getElementById("bgMusic");
+    music.muted = false;
+    music.play();
+}, { once: true });
+</script>
+
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Letters</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: url("lettersbg.jpg") center/cover no-repeat;
+}
+
+/* BACKGROUND BLUR */
+.bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+body.blur .bg {
+    filter: blur(6px);
+    transition: 0.3s;
+}
+
+/* CENTER TITLE */
+.lettertext {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+/* ORBIT */
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+/* FOLDERS */
+.folder {
+    position: absolute;
+    width: 90px;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease;
+}
+
+.folder:hover {
+    transform: translate(-50%, -55%) scale(1.1);
+}
+
+/* TOOLTIP */
+.tooltip {
+    position: absolute;
+    background: pink;
+    color: black;
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -120%);
+    transition: opacity 0.2s ease;
+    z-index: 1000;
+}
+
+/* POPUP LAYER */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* WHITE LETTER BOX */
+.letterBox {
+    width: 60%;
+    max-width: 600px;
+    min-height: 300px;
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    font-family: Arial;
+    overflow-y: auto;
+}
+
+/* TITLE + TEXT */
+.letterBox h2 {
+    margin: 0 0 10px 0;
+}
+
+.letterBox p {
+    font-size: 15px;
+    line-height: 1.5;
+    white-space: pre-wrap; /* IMPORTANT: keeps formatting */
+}
+
+/* CLOSE BUTTON */
+.closeBtn {
+    position: absolute;
+    right: 18%;
+    bottom: 25%;
+    width: 90px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.closeBtn:hover {
+    transform: translateY(-8px);
+}
+
+/* BACK BUTTON */
+.mainBack {
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    z-index: 20;
+}
+
+.mainBack:hover {
+    transform: translateX(-50%) translateY(-8px);
+}
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop muted id="bgMusic">
+    <source src="loop.mp4" type="audio/mp4">
+</audio>
+
+<div class="bg">
+
+    <img class="lettertext" src="lettertext.png">
+
+    <div class="orbit">
+        <img class="folder" src="folder1.png">
+        <img class="folder" src="folder2.png">
+        <img class="folder" src="folder3.png">
+        <img class="folder" src="folder4.png">
+        <img class="folder" src="folder5.png">
+        <img class="folder" src="folder6.png">
+        <img class="folder" src="folder7.png">
+        <img class="folder" src="folder8.png">
+    </div>
+
+    <a href="index.html">
+        <img class="mainBack" src="larrow.png">
+    </a>
+
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<!-- POPUP -->
+<div class="lightbox" id="lightbox">
+
+    <div class="letterBox">
+        <h2 id="title"></h2>
+        <p id="content"></p>
+    </div>
+
+    <!-- FIXED: onclick is now guaranteed -->
+    <img class="closeBtn" src="larrow.png" id="closeBtn">
+</div>
+
+<script>
+const folders = document.querySelectorAll(".folder");
+const tooltip = document.getElementById("tooltip");
+
+const title = document.getElementById("title");
+const content = document.getElementById("content");
+const lightbox = document.getElementById("lightbox");
+const closeBtn = document.getElementById("closeBtn");
+
+/* TEXT ON HOVER */
+const texts = [
+    "from ari ᯓ★",
+    "from mumma ‹𝟹",
+    "from adu 𝄞⨾𓍢",
+    "from poppy ·ᴥ·",
+    "from shivam ⋆˚꩜｡",
+    "from manto ۶۟ৎ",
+    "from avaneesh ʕ-ᴥ-ʔ",
+    "from capybara (´㉨`)"
+];
+
+/* LETTER CONTENT */
+const letters = [
+    {
+    title: "From Ari ⋆˚꩜｡ (also the programmer)",
+    text: `
+Dear Omera,
+
+You're my most favourite person (or cat) in this world. We've grown up together, and no matter the fights or little disturbances, I crave for your laughter and your wits the most.
+
+My favourite time spent is the time I spend with you, whether that's playing stupid games together or talking about even stupider stuff till 3 am.
+
+You've shaped me into who I am. You're the person I fall back to every single time. And I want to make you feel like you're the most loved person in the world.
+
+That's why I created this silly little website. I know it's not much, it's not even that good but I hope you like it :)
+
+I hope we can experience every future season together for all our lives. Because you're the autumn to my spring.
+
+PS: I Love You
+`
+},
+    {
+        title: "from Mumma",
+        text: `HAPPY BIRTHDAY GOLUUU 🥳🥳🥳  
+I just cannot describe in words how much I love you. Whenever I think of you, whenever I see you, I just feel most lucky person in this world because I got the most precious gift.
+I have seen you turning from a Gunda Golu 👿 to a beautiful matured Girl 🥰 , who sometimes becomes my caring Mumma 😍.
+But Ome, in caring for others, sometimes you get troubled, which is not good. You should care for yourself first; and then do for others. And yes, you should ask whatever you like. Do not hesitate in asking favor for yourself 😊.
+Babu, you are my 'Jaan', mere Dil ka Sukoon. Always be HAPPY & BLESSED...!!! 😇 You are my Best Friend 🤗
+Love YOU... 😘😘😘`
+    },
+    {
+    title: "from Adu (aka Satan)",
+    text: `
+Hello Omeii!!!
+
+I know this is not expected, and honestly I didn't expect to do this either, but I just decided one morning that I wanted to do something for you on this day. I don't know when it happened, but slowly as I got closer to Arshia, I started to see her family as mine too, and that of course includes you!
+
+I think you're wonderful, calm, understanding, brilliant and such an outstanding person. Even if we don't know each other very well, I just want you to know that I love you very much, and I love everything you've done for me, even if it was less, even if I haven't done anything for you.
+
+Happy birthday Omeii!
+
+Ps: Last time I came over I really should've taken a picture of you, you looked absolutely stunning that day, but I was afraid to ask because I thought you'd find it weird.
+
+Pps: I hope you'll learn to loosen up around me and on yourself, it's very cute to see you act silly sometimes ❤
+
+Ppps: Can I be the woof woof to your meow meow?
+`
+},
+    {
+        title: "from Teddy Bear (translated by ur poor programmer)",
+        text: `Omi Bobbyy
+It's your birthday today!!
+Happy birthday Jaan
+
+Arshia ne kaha ke omi ke baare me kuch likhna he, oof ye bohot mushkil he. Vo shabd kaha se lau jo tumhe describe kar sake? Fir bhi koshish karta hu. Jab tumhara janm hua us din baarish hui thi. Jaise dhoop se tarasti zameen ko raahat mili vaise hi hamare zindagi me khushiyo ki barsat hui jo aaj tak nirantar aa rahi he. 
+
+Tum bilkul apne naam ki jaisi ho. "OMERA" One who possess an inspiring personality with positive attitude. Tumhare aane ke saath humara parivar pura hua. Tumhare jaisi ek ladki agar har parivar ko mil jaaye to duniya jannat ho jaayegi. Mujhe lekin ye bhi pata he ke tumhare jaise aur koi nahi ho sakta, tum sab logo ki jaise care karti ho, samajhti ho vo sab kaabilo taarif he.
+Me tumhare baare baat karte vakt dinge maarta hu, flex karta hu, mujhe para he ye tumhe pasand nahi fir bhi tumhare liye apne aap taarife nikalti he. Fir dar bhi lagta he kahi tumhe nazar na lag jaye.
+lekin beta sabka dhyaan rakhte hue tum apna bhi dhyaan rakhna, tum hamare liye bohot zaruri ho, tum padhna, bohot padhna, apne aap ko aur behtar banane ke liye padhna, tum ek din apni manzil zaroor haasil karogi, agar kabhi kaamyaab na ho to nirash mat hona, kyoki vo tumhari haar nhi hogi, kabhi-kabhi chize bias hoti he, ye mera anubhav he.
+
+I LOVE YOU CHIBI BOBBYY
+												-YOUR BOBBY`
+    },
+    {
+    title: "from Shivam",
+    text: `
+Happy Birthday Omera yay
+
+To me, you're my favorite sister and the absolute best friend anyone could ever ask for!
+
+I never actually had a sister growing up, but having you in my life changed all of that. Somewhere along the way, you completely filled that space, becoming a true sister to me, and honestly, the best one that could ever exist.
+
+You have these very good qualities about you that I love. When I met you for the first time, you felt a bit serious, but then I realised it was just your nature. But the moment you feel comfortable, you instantly start making everyone around you crack up.
+
+You have this very adorable energy and such a great sense of humor that brings so much genuine laughter and joy.
+
+I hope you have the best life. Enjoy alott ❤️
+`
+},
+    {
+    title: "from manto ❤",
+    text: `
+Dear Omi,
+
+Omgg hheh lol lol typical opening but still you're dear to me Omi. Ahh I love you so much omi you mean a lot to me, I promise to cherish and love you till my last breath because you are too precious to lose.
+
+Omi I know things can be hard even for you, you're always worried about your studies and that you can't socialize well but as time goes I'm sure you'll learn things. But when you need to vent out on whatever I will always lend you my ear (hehe salman kaan XP) I'm always here omi, and will always be.
+
+I'm so happy you and ari came into my life and now you guys are my roman empire. If I have ever hurt you or done something wrong please forgive me and just know that I really do care about you and will always do.
+
+You are the sweetest, most lovely and pretty girl in my eyes omi and will always be. I wish the best for you in life and hope to see you grow ❤
+
+With lots and lots of love,
+Your's Mantoo!! ❤
+`
+},
+    {
+    title: "from Avaneesh",
+    text: `HAPPY BIRTHDAY OMEII:)))!!!
+I’m really thankful to have you as my best friend. Our friendship means ♾️ to me.
+
+Thank you for all the fun moments, weird talks (they're funny though), and always being there for me.
+
+You’re such an amazing person and I hope your day is as special as you are, filled with happiness and "purr-fect" 🐾🐱 moments.
+
+I just want you to stay happy and enjoy your birthday to the fullest 🎂💗🐱.
+
+meow meow!!!`
+},
+    {
+        title: "from Affy",
+        text: `E-1006 19 East
+Sector 19A, Nerul
+Navi Mumbai, Maharashtra 
+
+Dear Omera,
+
+I hope this letter finds you in great health.
+
+I am writting this letter in the occasion of your 14th birthday which shall be on 16th. I hope you achieve whatever you want in your life and become the greatest neurologist or whatever you want. I don't know what to write now so have a great birthday and a great year.
+
+And please make time to play Roblox with mee.
+
+Yours lovingly,
+Afraz( Alt+Tab,Taffi,Affi)`
+    }
+];
+
+const radius = 180;
+let angle = 0;
+let paused = false;
+
+/* ORBIT */
+function animate() {
+    const step = (2 * Math.PI) / folders.length;
+
+    folders.forEach((el, i) => {
+        const a = angle + i * step;
+
+        const x = radius * Math.cos(a);
+        const y = radius * Math.sin(a);
+
+        el.style.left = x + "px";
+        el.style.top = y + "px";
+    });
+
+    if (!paused) angle += 0.006;
+
+    requestAnimationFrame(animate);
+}
+
+/* EVENTS */
+folders.forEach((f, i) => {
+
+    f.addEventListener("mouseenter", () => {
+        paused = true;
+        tooltip.style.opacity = 1;
+        tooltip.textContent = texts[i];
+    });
+
+    f.addEventListener("mousemove", (e) => {
+        tooltip.style.left = e.pageX + "px";
+        tooltip.style.top = (e.pageY + 20) + "px";
+    });
+
+    f.addEventListener("mouseleave", () => {
+        paused = false;
+        tooltip.style.opacity = 0;
+    });
+
+    f.addEventListener("click", () => {
+        openLetter(i);
+    });
+});
+
+function openLetter(i) {
+    title.textContent = letters[i].title;
+    content.textContent = letters[i].text;
+
+    lightbox.style.display = "flex";
+    paused = true;
+    document.body.classList.add("blur");
+}
+
+function closeLetter() {
+    lightbox.style.display = "none";
+    paused = false;
+    document.body.classList.remove("blur");
+}
+
+/* FIXED CLOSE BUTTON */
+closeBtn.addEventListener("click", closeLetter);
+
+animate();
+</script>
+
+</body>
+</html>

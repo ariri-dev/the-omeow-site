@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-image: url("background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Center birthday image */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container img {
+    width: 300px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.container img:hover {
+    transform: translateY(-10px);
+}
+
+/* Envelope */
+.envelope-wrapper {
+    position: absolute;
+    top: 100px;
+    left: 350px;
+    width: 200px;
+}
+
+.envelope {
+    width: 100%;
+    cursor: pointer;
+}
+
+.envelope:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
+}
+
+/* Camera */
+.camera-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    transform: translateY(-50%);
+    width: 200px;
+}
+
+.camera {
+    width: 145%;
+    cursor: pointer;
+}
+
+.camera:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
+}
+
+/* Teddy */
+.teddy-wrapper {
+    position: absolute;
+    top: 65%;
+    left: 350px;
+    width: 250px;
+}
+
+.teddy {
+    width: 100%;
+    cursor: pointer;
+}
+
+.teddy:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
+}
+
+/* Music (right side of camera, same vertical position) */
+.music-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 1000px;
+    transform: translateY(-50%);
+    width: 250px;
+}
+
+.music {
+    width: 100%;
+    cursor: pointer;
+}
+
+.music:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
+}
+
+/* Wiggle animation */
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+.memes-wrapper {
+    position: absolute;
+    top: 65%;
+    left: 800px;
+    width: 250px;
+}
+
+.memes {
+    width: 100%;
+    cursor: pointer;
+}
+
+.memes:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
+}
+
+.heart-wrapper {
+    position: absolute;
+    top: 100px;
+    left: 850px;
+    width: 200px;
+}
+
+.heart {
+    width: 110%;
+    cursor: pointer;
+}
+
+.heart:hover {
+    animation: wiggle 0.4s ease-in-out infinite;
+}
+</style>
+</head>
+
+<script src="https://app.embed.im/balloons.js" defer></script>
+
+<body>
+
+<!-- MUSIC FIX -->
+<audio id="bgmusic" autoplay loop>
+    <source src="magnetic.mp4" type="audio/mp4">
+</audio>
+
+<script>
+window.addEventListener("load", () => {
+    const audio = document.getElementById("bgmusic");
+
+    const playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            document.body.addEventListener("click", () => {
+                audio.play();
+            }, { once: true });
+        });
+    }
+});
+</script>
+
+<a href="letters.html">
+    <div class="envelope-wrapper">
+        <img class="envelope" src="envelope.png" alt="envelope">
+    </div>
+</a>
+
+<a href="gallery.html">
+    <div class="camera-wrapper">
+        <img class="camera" src="camera.png" alt="camera">
+    </div>
+</a>
+
+<a href="https://www.youtube.com/watch?v=K2aJTT29ZdU" target="_blank">
+    <div class="teddy-wrapper">
+        <img class="teddy" src="teddy.png" alt="teddy">
+    </div>
+</a>
+
+<a href="music.html">
+    <div class="music-wrapper">
+        <img class="music" src="music.png" alt="music">
+    </div>
+</a>
+
+<div class="container">
+    <img id="birthday" src="birthday.png" alt="birthday image">
+</div>
+
+<a href="memes.html">
+    <div class="memes-wrapper">
+        <img class="memes" src="memes.png" alt="memes">
+    </div>
+</a>
+
+<a href="heart.html">
+    <div class="heart-wrapper">
+        <img class="heart" src="heart.png" alt="heart">
+    </div>
+</a>
+
+</body>
+</html>

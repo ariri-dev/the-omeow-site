@@ -1,0 +1,63 @@
+<html>
+<head>
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+
+    background-image: url("backgroundmusic.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 60px;
+}
+
+/* Spotify embed */
+iframe {
+    width: 95%;
+    height: 50vh;
+    border-radius: 12px;
+}
+
+/* Back button */
+.back-wrapper {
+    position: absolute;
+    top: calc(60px + 50vh + 20px);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.back {
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.back:hover {
+    transform: translateY(-8px);
+}
+</style>
+</head>
+
+<body>
+    <iframe data-testid="embed-iframe"
+        src="https://open.spotify.com/embed/playlist/77L0kbT05SpTNYTuecJxwb?utm_source=generator&si=77212354cc5148f4"
+        frameBorder="0"
+        allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+    </iframe>
+
+    <a href="index.html">
+        <div class="back-wrapper">
+            <img class="back" src="back.png" alt="back">
+        </div>
+    </a>
+
+</body>
+</html>

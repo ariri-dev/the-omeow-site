@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hearts</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: url("omiheart.png") center/cover no-repeat;
+}
+
+/* BASE STYLE */
+.item {
+    position: absolute;
+    cursor: pointer;
+    animation: wiggle 1s infinite ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+/* STOP WIGGLE ON HOVER */
+.item:hover {
+    animation: none;
+    transform: scale(1.1);
+}
+
+/* TEXT */
+.text {
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    opacity: 0;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+/* SHOW TEXT ON HOVER */
+.box:hover .text {
+    opacity: 1;
+}
+
+/* WIGGLE */
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* ===== POSITIONS ===== */
+
+/* HEART 1 (SMALLER ONLY HERE) */
+.h1 {
+    top: 50%;
+    left: 37%;
+    width: 180px;
+}
+
+/* HEART 2 */
+.h2 {
+    top: 20%;
+    left: 30%;
+    width: 260px;
+}
+
+/* HEART 3 */
+.h3 {
+    top: 50%;
+    left: 53%;
+    width: 200px;
+}
+
+/* HEART 4 */
+.h4 {
+    top: 30%;
+    left: 45%;
+    width: 250px;
+}
+
+/* HEART 5 */
+.h5 {
+    top: 15%;
+    left: 55%;
+    width: 230px;
+}
+
+/* Right Arrow */
+.rarrow {
+    position: absolute;
+    top: 50%;
+    right: 320px;
+    transform: translateY(-50%);
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Float up on hover */
+.rarrow:hover {
+    transform: translateY(-60%);
+}
+
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+    <source src="bubblegum.mp4" type="audio/mp4">
+</audio>
+
+<div class="box">
+    <img class="item h1" src="heart1.jpg">
+    <div class="text" style="top:42%; left:20%;">science brainrot jokes</div>
+</div>
+
+<div class="box">
+    <img class="item h2" src="heart2.png">
+    <div class="text" style="top:27%; left:40%;">science & maths (stop studying!!)</div>
+</div>
+
+<div class="box">
+    <img class="item h3" src="heart3.png">
+    <div class="text" style="top:57%; left:45%;">cats!!!!</div>
+</div>
+
+<div class="box">
+    <img class="item h4" src="heart4.png">
+    <div class="text" style="top:37%; left:65%;">family :)</div>
+</div>
+
+<div class="box">
+    <img class="item h5" src="heart5.png">
+    <div class="text" style="top:52%; left:70%;">music <3</div>
+</div>
+
+<a href="myheart.html">
+    <img class="rarrow" src="rarrow.png" alt="next">
+</a>
+
+</body>
+</html>

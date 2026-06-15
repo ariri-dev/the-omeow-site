@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Background image */
+body {
+    background-image: url("img2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Arrows */
+.arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+/* Left arrow */
+#leftArrow {
+    left: 120px;
+}
+
+/* Right arrow */
+#rightArrow {
+    right: 120px;
+}
+
+/* Hover lift */
+.arrow:hover {
+    transform: translateY(-60%);
+}
+</style>
+</head>
+
+<body>
+
+<iframe src="bgmusic.html" style="display:none;"></iframe>
+
+<!-- Left arrow -->
+<a href="gallery.html">
+    <img id="leftArrow" class="arrow" src="larrow.png" alt="left arrow">
+</a>
+
+<!-- Right arrow -->
+<a href="img3.html">
+    <img id="rightArrow" class="arrow" src="rarrow.png" alt="right arrow">
+</a>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hearts</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: url("myheart.png") center/cover no-repeat;
+}
+
+/* BASE STYLE */
+.item {
+    position: absolute;
+    cursor: pointer;
+    animation: wiggle 1s infinite ease-in-out;
+    transition: transform 0.3s ease;
+}
+
+/* STOP WIGGLE ON HOVER */
+.item:hover {
+    animation: none;
+    transform: scale(1.1);
+}
+
+/* TEXT */
+.text {
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    opacity: 0;
+    transition: 0.3s;
+    white-space: nowrap;
+}
+
+/* SHOW TEXT ON HOVER */
+.box:hover .text {
+    opacity: 1;
+}
+
+/* WIGGLE */
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+/* ===== POSITIONS ===== */
+
+/* HEART 1 */
+.h1 {
+    top: 50%;
+    left: 30%;
+    width: 260px;
+}
+
+/* HEART 2 */
+.h2 {
+    top: 20%;
+    left: 30%;
+    width: 260px;
+}
+
+/* HEART 3 */
+.h3 {
+    top: 50%;
+    left: 53%;
+    width: 200px;
+}
+
+/* HEART 4 */
+.h4 {
+    top: 30%;
+    left: 42%;
+    width: 250px;
+}
+
+/* HEART 5 */
+.h5 {
+    top: 15%;
+    left: 55%;
+    width: 230px;
+}
+
+/* Left Arrow */
+.larrow {
+    position: absolute;
+    top: 50%;
+    left: 220px;
+    transform: translateY(-50%);
+    width: 120px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Lift on hover */
+.larrow:hover {
+    transform: translateY(-60%);
+}
+
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+    <source src="bubblegum.mp4" type="audio/mp4">
+</audio>
+
+<div class="box">
+    <img class="item h1" src="heart6.jpg">
+    <div class="text" style="top:50%; left:30%;">omii!!</div>
+</div>
+
+<div class="box">
+    <img class="item h2" src="heart7.jpg">
+    <div class="text" style="top:27%; left:40%;">omii again!!</div>
+</div>
+
+<div class="box">
+    <img class="item h3" src="heart8.jpg">
+    <div class="text" style="top:57%; left:45%;">omii my cat!!</div>
+</div>
+
+<div class="box">
+    <img class="item h4" src="heart9.jpg">
+    <div class="text" style="top:37%; left:65%;">oops omi!</div>
+</div>
+
+<div class="box">
+    <img class="item h5" src="heart10.jpg">
+    <div class="text" style="top:52%; left:70%;">OMERA <3</div>
+</div>
+
+<a href="index.html">
+    <img class="larrow" src="larrow.png" alt="back">
+</a>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0;">
+
+<audio id="music" autoplay loop>
+    <source src="ticktack.mp4" type="audio/mp4">
+</audio>
+
+<script>
+const audio = document.getElementById("music");
+
+// try to resume last position (still resets on page reload in most cases)
+if (localStorage.getItem("musicTime")) {
+    audio.currentTime = localStorage.getItem("musicTime");
+}
+
+setInterval(() => {
+    localStorage.setItem("musicTime", audio.currentTime);
+}, 500);
+</script>
+
+</body>
+</html>

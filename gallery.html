@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+}
+
+/* Intro video */
+#introVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+/* Final image */
+#finalImage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    display: none;
+}
+
+/* Arrows */
+.arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px;   /* bigger */
+    cursor: pointer;
+    display: none;
+    transition: transform 0.2s ease;
+}
+
+/* Move closer to center */
+#leftArrow {
+    left: 120px;
+}
+
+#rightArrow {
+    right: 120px;
+}
+
+/* Hover lift */
+.arrow:hover {
+    transform: translateY(-60%);
+}
+</style>
+</head>
+
+<body>
+
+<iframe src="bgmusic.html" style="display:none;"></iframe>
+
+<!-- Video -->
+<video id="introVideo" autoplay muted playsinline>
+    <source src="animatedcamera.mp4" type="video/mp4">
+</video>
+
+<!-- Final image -->
+<img id="finalImage" src="img1.png" alt="Image">
+
+<!-- Arrows -->
+<a href="#">
+    <img id="leftArrow" class="arrow" src="larrow.png" alt="left arrow">
+</a>
+
+<a href="img2.html">
+    <img id="rightArrow" class="arrow" src="rarrow.png" alt="right arrow">
+</a>
+
+<script>
+const video = document.getElementById("introVideo");
+const image = document.getElementById("finalImage");
+const leftArrow = document.getElementById("leftArrow");
+const rightArrow = document.getElementById("rightArrow");
+
+video.addEventListener("ended", () => {
+    video.style.display = "none";
+    image.style.display = "block";
+    leftArrow.style.display = "block";
+    rightArrow.style.display = "block";
+});
+</script>
+
+</body>
+</html>

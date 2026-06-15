@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, body { margin:0; height:100%; overflow:hidden; }
+
+body {
+    background: url("img15.png") center/cover no-repeat;
+}
+
+.arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 140px;
+    transition: 0.2s;
+}
+
+.arrow:hover { transform: translateY(-60%); }
+
+#left { left:120px; }
+#right { right:120px; }
+</style>
+</head>
+
+<body>
+<iframe src="bgmusic.html" style="display:none;"></iframe>
+<a href="img14.html"><img id="left" class="arrow" src="larrow.png"></a>
+<a href="img16.html"><img id="right" class="arrow" src="rarrow.png"></a>
+</body>
+</html>
